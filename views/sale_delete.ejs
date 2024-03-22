@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include('partials/sidebar') %>
+        </div>
+        <div class="col-sm-10">
+            <h1><%= title %>:</h1>
+            <p><%= sale._id %></p>
+                <p>Do you really want to delete this Sale?</p>
+                  <form method="POST">
+                    <div class="form-group">
+                      <input id="saleid" class="form-control" type="hidden" name="saleid" value="<%= sale._id %>">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                  </form>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

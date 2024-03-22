@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include('partials/sidebar') %>
+        </div>
+        <div class="col-sm-10">
+            <h1><%= title %></h1>
+
+          <form method="POST">
+            <div class="form-group">
+              <label for="fruit">Fruit:</label>
+              <select id="fruit" class="form-control" name="fruit" required>
+                  <option value=""> -- Please select a fruit -- </option>
+                  <% fruits.forEach(function(fruit) { %>
+                      <% if (fruitinstance && fruit._id.toString() === fruitinstance.fruit.toString()) { %>
+                          <option value="<%= fruit._id %>" selected><%= fruit.name %></option>
+                      <% } else { %>
+                          <option value="<%= fruit._id %>"><%= fruit.name %></option>
+                      <% } %>
+                  <% }); %>
+              </select>
+          </div>
+          
+
+            <div class="form-group">
+              <label for="arrival">Date of Arrival:</label>
+              <input id="arrival" class="form-control" type="date" name="arrival" value="<%= typeof fruitinstance !== "undefined" && fruitinstance.arrival ? fruitinstance.arrival.toISOString().split('T')[0] : '' %>">
+            </div>
+
+            <div class="form-group">
+              <label for="size">Size: (Quantity per Carton) </label>
+             <input class="form-control" type="number" name="size" inputmode="numeric" pattern="[0-9]*" placeholder="Enter Quantity per Carton" value="<%= typeof fruitinstance !== "undefined" && fruitinstance.size ? fruitinstance.size : '' %>">
+             <small> Egs. 1 carton contains 24 pieces. Key In: <em>24</em> </small>
+             <br/>
+            <small>Egs. 1 carton contains 10 kg. Key In: <em>10</em></small>
+            <br/>
+            <br/>
+             <label for="purchaseprice">Purchase Price: </label>
+             <input class="form-control" type="number" name="purchaseprice" inputmode="numeric" pattern="[0-9]*" step="any" placeholder="Enter Purchase Price (Egs. 250.00)" value="<%= typeof fruitinstance !== "undefined" && fruitinstance.purchaseprice ? fruitinstance.purchaseprice : '' %>">
+            </div>
+
+            <div class="form-group">
+              <p>Quantity Type: (Weight or Pieces)</p>
+              <label for="g">g</label>
+              <input type="radio" name="quantitytype" value="g" <%= typeof fruitinstance !== 'undefined' && fruitinstance.quantitytype === 'g' ? 'checked' : '' %>> 
+              <label for="Pcs">Pcs</label>
+              <input type="radio" name="quantitytype" value="Pcs" <%= typeof fruitinstance !== 'undefined' && fruitinstance.quantitytype === 'Pcs' ? 'checked' : '' %>>
+            </div>
+
+            <div class="form-group">
+              <label for="quantityIn">Quantity In (Cartons)</label>
+              <input class="form-control" type="number" name="quantityIn" inputmode="numeric" pattern="[0-9]*" placeholder="Enter Purchased Quantity of Cartons" value="<%= typeof fruitinstance !== "undefined" && fruitinstance.stock.quantityIn ? fruitinstance.stock.quantityIn : '' %>">
+            </div>
+
+            <input type="hidden" name="fruitInstanceId" value="<%= title %>">
+
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+          
+          <% if (errors.length > 0) { %>
+            <ul>
+              <% errors.forEach(error => { %>
+                <li><%= error.msg %></li>
+              <% }); %>
+            </ul>
+            <% } %>
+    </div>
+</div>
+</body>
+</html>

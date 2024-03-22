@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <h1></h1>
+  <div class="container-fluid ">
+    <div class="row">
+
+        <div class="col-sm-3">
+        <%- include('./partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-sm-9">
+          <h1><%= title %></h1>
+          <p>The following are all the available categories of fruits:</p>
+          <% if(category_list.length>0){%>
+           
+                <% category_list.forEach(cat=>{ %>
+                    <a href="<%=cat.url%>"><%= cat.name %></a> 
+                    <br/>             
+                <% }) %>
+            
+            <% } else {%>
+                <p> There are no Categories.</p>
+            <% } %>
+        </div>
+        
+        <%- include("./partials/footer") %>
+    </div>
+</div>
+
+
+</body>
+</html>

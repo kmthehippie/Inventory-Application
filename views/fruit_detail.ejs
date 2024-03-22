@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include('partials/sidebar') %>
+        </div>
+        <div class="col-sm-10">
+            <h1>Name: <%= fruit.name %></h1>
+
+            <p><strong>Fruit Origin: </strong><%= fruit.origin %></p>
+            <p><%= fruit.description %></p>
+            <hr>
+      
+            <% if (fruit_instances.length > 0) { %>
+                <% fruit_instances.forEach(val => { %>
+                    <strong>Id: </strong><a href="<%= val.url %>"><%= val._id %></a>
+                    <strong>Size: </strong> <%=val.size%><%=val.quantitytype%>
+                    <br/>
+                <% }); %>
+            <% } else { %>
+              <p>There are no copies of this fruit in the library.</p>
+            <% } %>
+            <br/>
+            <a href="<%= fruit.url%>/delete"><button class="btn btn-primary m-3">Delete Fruit</button></a>
+            <a href="<%= fruit.url%>/update"><button class="btn btn-primary m-3">Update Fruit</button></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

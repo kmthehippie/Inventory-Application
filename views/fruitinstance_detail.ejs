@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include('partials/sidebar') %>
+        </div>
+        <div class="col-sm-10">
+            <h1>Fruit Instance ID:</h1>
+            <h4>  <%= title %> </h4>
+            <br/>
+            <h2><%=fruit.name%></h2>
+            <hr>
+            <table>
+                <tr>
+                    <td>Arrival Date</td>
+                    <td class="p-3"><%= fruit_instance.arrival_formatted %></td>
+                </tr>
+                <tr>
+                    <td>Purchased Quantity (Carton)</td>
+                    <td class="p-3"><%= fruit_instance.stock.quantityIn %> Ctn</td>
+                </tr>
+            </tr>
+            <td>Purchased Quantity (<%= fruit_instance.quantitytype %>)</td>
+            <td class="p-3">
+                <% if (fruit_instance.quantitytype === "g") { %>
+                    <%= fruit_instance.stock.quantityIn * fruit_instance.size %> kg
+                <% } else { %>
+                    <%= fruit_instance.stock.quantityIn * fruit_instance.size %> <%= fruit_instance.quantitytype %>
+                <% } %>
+            </td>
+            </tr>
+            <td>Size</td>
+            <td class="p-3">
+                <%= fruit_instance.size %> <%= fruit_instance.quantitytype === "g" ? "kg" : "Pcs" %> per carton
+            </td>
+            </tr>
+            <tr>
+                <td>Purchase Price</td>
+                <td class="p-3">$ <%= fruit_instance.purchaseprice %></td>
+            </tr>
+            <tr>
+                <td>Current Available Quantity</td>
+                <td class="p-3"><%= fruit_instance.quantity_formatted%></td>
+            </tr>
+            </table>
+           <hr>
+            <h3>Spoilages: </h3>
+            <% if (spoilages.length === 0) { %>
+                <%= "There are no spoilages yet" %>
+           <% } %>
+            <% spoilages.forEach(spoilage =>{ %>
+                <a href="<%=spoilage.url%>"><%= spoilage._id %></a> : <%= spoilage.amount %> <%= fruit_instance.quantitytype %> 
+                <br/>
+                <%}) %>
+            <a href="/catalog/spoilage/create/<%=title%>"><button class="btn btn-primary m-3">+ Create New Spoilage</button></a>
+                <br/>    
+            <h3>Sales: </h3>
+            <% if (sales.length === 0) { %>
+                <%= "There are no sales yet" %>
+           <% } %>
+            <% sales.forEach(sale =>{ %>
+                <a href="<%=sale.url%>"><%= sale._id %></a>: <%= sale.amount %> <%= fruit_instance.quantitytype %> | $<%= sale.price %>
+            <br/>
+            <%}) %>
+            <a href="/catalog/sale/create/<%=title%>"><button class="btn btn-primary m-3">+ Create New Sale</button></a>
+            <br/>
+            <br/>
+            <br/>
+            <a href="<%= fruit_instance.url%>/delete"><button class="btn btn-primary m-3">Delete Fruit Instance</button></a>
+            <a href="<%= fruit_instance.url%>/update"><button class="btn btn-primary m-3">Update Fruit Instance</button></a>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

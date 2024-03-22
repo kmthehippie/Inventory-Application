@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <h1></h1>
+  <div class="container-fluid ">
+    <div class="row">
+
+        <div class="col-sm-3">
+        <%- include('./partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-sm-9">
+          <h1><%= title %></h1>
+          
+            <% spoilage_list.forEach(spoilage =>{ %>
+                <p>Date: <small><%= spoilage.spoilage_date_formatted %></small> </p>
+                  <p>ID: <a href="<%=spoilage.url%>"><%= spoilage._id %></a></p>    
+                  <br/> 
+            <% }) %>
+        </div>
+        
+        <%- include("./partials/footer") %>
+    </div>
+</div>
+
+
+</body>
+</html>

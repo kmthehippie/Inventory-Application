@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+  <h1></h1>
+  <div class="container-fluid ">
+    <div class="row">
+
+        <div class="col-sm-3">
+        <%- include('./partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-sm-9">
+          <h1><%= title %></h1>
+          <p>Welcome to <em>Fruit Inventory</em>, a very basic Express website developed by km.</p>
+          <h1> Counter: </h1>
+          <p>The current fruits in stock are as follows:</p>
+          <ul>
+            <li><strong>Fruits:</strong> <%=fruit_count%></li>
+            <li><strong>Category:</strong> <%=category_count%></li>
+            <li><strong>Fruit Instances:</strong> <%=fruit_instance_count%></li>
+            <li><strong>Sales:</strong> <%=sale_count%></li>
+            <li><strong>Spoilages:</strong> <%=spoilage_count%></li>        
+          </ul>
+        </div>
+        
+        <%- include("./partials/footer") %>
+    </div>
+</div>
+
+
+</body>
+</html>
